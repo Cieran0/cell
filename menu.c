@@ -18,7 +18,9 @@ void process_menu(){
         case 1:{
             printf("Enter a rule: ");
             if(!scanf("%d", &second_menu_input)){
-                gen_map(random_rule());
+                rule=random_rule();
+                gen_map(rule);
+                printf("rule: %d\n",rule);
             }
             else {
                 gen_map(second_menu_input);
@@ -37,7 +39,9 @@ void process_menu(){
         case 2:{
             printf("Enter a rule: ");
             if(!scanf("%d", &second_menu_input)){
-                gen_map(random_rule());
+                rule=random_rule();
+                gen_map(rule);
+                printf("rule: %d\n",rule);
             }
             else {
                 gen_map(second_menu_input);
