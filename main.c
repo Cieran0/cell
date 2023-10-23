@@ -1,7 +1,12 @@
-#include "map.h"
+#include "menu.h"
 
 char cells[CELL_COUNT] = {0};
 char cells_back[CELL_COUNT] = {0};
+
+const char *bit_rep[8] = {
+    [0] = "000", [1] = "001", [2] = "010", [3] = "011",
+    [4] = "100", [5] = "101", [6] = "110", [7] = "111",
+};
 
 char map[] = {
     [0b111] = 0, 
@@ -27,6 +32,13 @@ void random_cells() {
     {
         cells[i] = rand()%2;
     }
+}
+
+int random_rule(){
+    srand(time(NULL));
+    int r = rand()%256;
+
+    return r;
 }
 
 void print_cells() {
@@ -69,11 +81,11 @@ void print_to_file(int line_input){
     }
 
     for(int i = 0; i < line_input; i++){
-        do_generation();
         for (int i = 0; i < CELL_COUNT; i++){
         fprintf(f,"%d",cells[i]);
         }
         fprintf(f,"\n");
+        do_generation();
     }
     fclose(f);
 }
@@ -83,26 +95,16 @@ void resetCells(){
     cells[50] = 1;
 }
 
-int main() {
-    srand(time(NULL));
-    gen_map(30);
-    char in = 0b001;
-    printf("In: %s, Out: %d\n",bit_rep[in],map[in]);
-    cells[50] = 1;
-    //random_cells();
-    print_cells();
-
-    int line_input = 0;
-
-    printf("Enter how many lines: ");
-    scanf("%d", &line_input);
-
-    print_to_file(line_input);
-
-    resetCells();
-    for(int i = 0; i < 49; i++){
-        do_generation();
+void display_better(int line_input){
+    for(int i = 0; i < line_input; i++){
         print_cells();
+        do_generation();
     }
+}
+
+int main() {
+
+    process_menu();
+
     return 0;
 }

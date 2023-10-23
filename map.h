@@ -5,10 +5,7 @@
 
 #define CELL_COUNT 100
 
-const char *bit_rep[8] = {
-    [0] = "000", [1] = "001", [2] = "010", [3] = "011",
-    [4] = "100", [5] = "101", [6] = "110", [7] = "111",
-};
+extern char cells[CELL_COUNT];
 
 void gen_map(char rule);
 void random_cells();
@@ -18,3 +15,5 @@ char* positions_to_values(char positions[]);
 void do_generation();
 void print_to_file(int line_input);
 void resetCells();
+void display_better(int line_input);
+int random_rule();
