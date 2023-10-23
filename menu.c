@@ -6,55 +6,39 @@ void print_menu(){
     printf("3. urmum\n");
 }
 
+void get_rules_and_lines(int* rules, int* lines) {
+    printf("Enter a rule: ");
+    if(!scanf("%d", rules)){
+        *rules=random_rule();
+        gen_map(*rules);
+        printf("rule: %d\n",*rules);
+    }
+    else {
+        gen_map(*rules);
+    }
+    while(getchar()!='\n');
+    printf("Enter how many lines: ");
+    scanf("%d", lines);
+    resetCells();
+}
+
 void process_menu(){
     print_menu();
     int menu_input;
-    int second_menu_input;
-    int rule;
+    int lines;
+    int rules;
     
     scanf("%d", &menu_input);
 
     switch(menu_input){
         case 1:{
-            printf("Enter a rule: ");
-            if(!scanf("%d", &second_menu_input)){
-                rule=random_rule();
-                gen_map(rule);
-                printf("rule: %d\n",rule);
-            }
-            else {
-                gen_map(second_menu_input);
-            }
-            while(getchar()!='\n');
-
-            cells[CELL_COUNT/2] = 1;
-            int line_input = 0;
-
-            printf("Enter how many lines: ");
-            scanf("%d", &line_input);
-            resetCells();
-            display_better(line_input);
+            get_rules_and_lines(&rules,&lines);
+            display_better(lines);
             break;
         }
         case 2:{
-            printf("Enter a rule: ");
-            if(!scanf("%d", &second_menu_input)){
-                rule=random_rule();
-                gen_map(rule);
-                printf("rule: %d\n",rule);
-            }
-            else {
-                gen_map(second_menu_input);
-            }
-            while(getchar()!='\n');
-            
-            cells[CELL_COUNT/2] = 1;
-            int line_input = 0;
-
-            printf("Enter how many lines: ");
-            scanf("%d", &line_input);
-            resetCells();
-            print_to_file(line_input);
+            get_rules_and_lines(&rules,&lines);
+            print_to_file(lines);
             break;
         }
     }
