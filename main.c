@@ -37,39 +37,30 @@ void print_cells() {
     printf("\n");
 }
 
-char concat(char values[]) {
+char concat(char values[], int len) {
     char result=0;
-    for (int i = 0; i < 3; i++)
+    for (int i = 0; i < len; i++)
     {
         result |= (values[i] << i);
     }
     return result;
 }
 
-char* positions_to_values(char positions[]) {
-    char* values = (char*)malloc(sizeof(char)*3);
-    values[0] = cells_back[positions[0]];
-    values[1] = cells_back[positions[1]];
-    values[2] = cells_back[positions[2]];
-    return values;
+int wrap(int num) {
+    if(num>=CELL_COUNT) return 0;
+    if(num<0) return CELL_COUNT-1;
+    return num;
 }
 
 void do_generation() {
     memcpy(cells_back,cells,CELL_COUNT);
-    char positions[3]={0};
+    char values[3]={0};
     for (int i = 0; i < CELL_COUNT; i++)
     {
-        positions[0]=i+1;
-        positions[1]=i;
-        positions[2]=i-1;
-        for (int j = 0; j < 3; j++)
-        {
-            if(positions[j] >= CELL_COUNT)
-                positions[j]=0;
-            else if(positions[j]<0)
-                positions[j]=CELL_COUNT-1;
-        }
-        cells[i]=map[concat(positions_to_values(positions))];
+        values[0]=cells_back[wrap(i+1)];
+        values[1]=cells_back[i];
+        values[2]=cells_back[wrap(i-1)];
+        cells[i]=map[concat(values,3)];
     }
     
 }

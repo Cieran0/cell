@@ -13,7 +13,7 @@ const char *bit_rep[8] = {
 void gen_map(char rule);
 void random_cells();
 void print_cells();
-char concat(char values[]);
+char concat(char values[], int len);
 char* positions_to_values(char positions[]);
 void do_generation();
 void print_to_file(int line_input);
