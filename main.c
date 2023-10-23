@@ -1,16 +1,7 @@
-#include "stdio.h"
-#include "stdlib.h"
-#include "time.h"
-
-#define CELL_COUNT 100
+#include "map.h"
 
 char cells[CELL_COUNT] = {0};
 char cells_back[CELL_COUNT] = {0};
-
-const char *bit_rep[8] = {
-    [0] = "000", [1] = "001", [2] = "010", [3] = "011",
-    [4] = "100", [5] = "101", [6] = "110", [7] = "111",
-};
 
 char map[] = {
     [0b111] = 0, 
@@ -57,13 +48,14 @@ char concat(char values[]) {
 
 char* positions_to_values(char positions[]) {
     char* values = (char*)malloc(sizeof(char)*3);
-    values[0] = cells[positions[0]];
-    values[1] = cells[positions[1]];
-    values[2] = cells[positions[2]];
+    values[0] = cells_back[positions[0]];
+    values[1] = cells_back[positions[1]];
+    values[2] = cells_back[positions[2]];
     return values;
 }
 
 void do_generation() {
+    memcpy(cells_back,cells,CELL_COUNT);
     char positions[3]={0};
     for (int i = 0; i < CELL_COUNT; i++)
     {
@@ -82,15 +74,50 @@ void do_generation() {
     
 }
 
+void print_to_file(int line_input){
+
+    char* filename  = "1dCA.txt";
+    FILE* f = fopen(filename, "w");
+
+    if(f == NULL){
+        printf("Error opening file %s", filename);
+    }
+
+    for(int i = 0; i < line_input; i++){
+        do_generation();
+        for (int i = 0; i < CELL_COUNT; i++){
+        fprintf(f,"%d",cells[i]);
+        }
+        fprintf(f,"\n");
+    }
+    fclose(f);
+}
+
+void resetCells(){
+    memset(cells,0,CELL_COUNT);
+    cells[50] = 1;
+}
+
 int main() {
     srand(time(NULL));
     gen_map(30);
     char in = 0b001;
-    printf("In: %s, Out: %d\n",bit_rep[in & 0x0F],map[in]);
-    random_cells();
-    print_cells();
-    do_generation();
+    printf("In: %s, Out: %d\n",bit_rep[in],map[in]);
+    cells[50] = 1;
+    //random_cells();
     print_cells();
 
+    int line_input = 0;
+
+    printf("Enter how many lines: ");
+    scanf("%d", &line_input);
+
+    print_to_file(line_input);
+
+    resetCells();
+    for(int i = 0; i < 49; i++){
+        do_generation();
+        print_cells();
+    }
     return 0;
 }
