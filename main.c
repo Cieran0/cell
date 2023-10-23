@@ -46,20 +46,14 @@ char concat(char values[], int len) {
     return result;
 }
 
-int wrap(int num) {
-    if(num>=CELL_COUNT) return 0;
-    if(num<0) return CELL_COUNT-1;
-    return num;
-}
-
 void do_generation() {
     memcpy(cells_back,cells,CELL_COUNT);
     char values[3]={0};
     for (int i = 0; i < CELL_COUNT; i++)
     {
-        values[0]=cells_back[wrap(i+1)];
+        values[0]=cells_back[i == CELL_COUNT-1 ? 0 : i+1];
         values[1]=cells_back[i];
-        values[2]=cells_back[wrap(i-1)];
+        values[2]=cells_back[i == 0 ? CELL_COUNT-1 : i-1];
         cells[i]=map[concat(values,3)];
     }
     
