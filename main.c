@@ -70,7 +70,7 @@ void do_generation() {
         positions[0]=i+1;
         positions[1]=i;
         positions[2]=i-1;
-        for (int j = 0; j < 3; i++)
+        for (int j = 0; j < 3; j++)
         {
             if(positions[j] >= CELL_COUNT)
                 positions[j]=0;
