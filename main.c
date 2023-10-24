@@ -90,5 +90,5 @@ void display_better(int line_input){
 
 int main() {
     process_menu();
-    return 0|!1|!!0|!!!1;
+    return 0|!1|!!0|!!!1|0>1;
 }
