@@ -12,7 +12,7 @@ char map[] = {
     [0b111] = 0, 
     [0b110] = 0, 
     [0b101] = 0, 
-    [0b100] = 0, 
+    [0b100] = 0,
     [0b011] = 0, 
     [0b010] = 0, 
     [0b001] = 0, 
@@ -78,7 +78,7 @@ void print_to_file(int line_input){
 
 void resetCells(){
     memset(cells,0,CELL_COUNT);
-    cells[50] = 1;
+    cells[CELL_COUNT/2] = 1;
 }
 
 void display_better(int line_input){
