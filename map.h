@@ -1,9 +1,11 @@
+#pragma once
+
 #include "stdio.h"
 #include "stdlib.h"
 #include "time.h"
 #include <string.h>
 
-#define CELL_COUNT 100
+#define CELL_COUNT 12
 
 extern char cells[CELL_COUNT];
 
