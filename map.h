@@ -4,7 +4,6 @@
 #include "stdlib.h"
 #include "time.h"
 #include <string.h>
-#include "util.h"
 
 #define CELL_COUNT 100
 

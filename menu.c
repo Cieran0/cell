@@ -52,7 +52,7 @@ void process_menu(){
             break;
         }
         case 3:{
-            display_all_cycles(get_number_cycles());
+            display_life_cycles(get_number_cycles());
             break;
         }
     }

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "map.h"
-#include "automation_2d.h"
+#include "automaton_2d.h"
 
 void print_menu();
 void process_menu();
