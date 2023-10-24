@@ -6,10 +6,12 @@
 #include <string.h>
 #include <unistd.h>
 #include "map.h"
+#include "util.h"
 
 extern int two_d_map[CELL_COUNT][CELL_COUNT];
 extern int next_2d_map[CELL_COUNT][CELL_COUNT];
-extern int neighbour_count;
+
+#define CELL_COUNT_2D 12
 
 void gen_random_2d_map();
 void gen_next_map();
