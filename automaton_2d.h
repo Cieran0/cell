@@ -23,4 +23,4 @@ int count_neighbours(int x, int y);
 void next_life_gen();
 void display_generation();
 void display_life_cycles(int cycles);
-void display_odd_cycles(int cycles);
+void display_factor_cycles(int cycles, int rule);
