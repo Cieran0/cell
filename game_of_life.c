@@ -8,7 +8,7 @@ void gen_random_2d_map(){
 
     for(int y = 0; y < CELL_COUNT_2D; y++){
         for(int x = 0; x < CELL_COUNT_2D; x++){
-            two_d_map[x][y] = rand()%2;
+            two_d_map[x][y] = rand()%2 && rand()%2 && rand()%2;
         }
     }
 }
@@ -52,7 +52,7 @@ int count_neighbours(int x, int y) {
 void next_life_gen(){
     memcpy(next_2d_map,two_d_map,sizeof(two_d_map));
     for_2d(x,CELL_COUNT_2D,y,CELL_COUNT_2D) {
-            next_2d_map[x][y]=apply_life_rules(count_neighbours(x,y),two_d_map[x][y]);
+        next_2d_map[x][y]=apply_life_rules(count_neighbours(x,y),two_d_map[x][y]);
     }
     memcpy(two_d_map,next_2d_map,sizeof(two_d_map));
 }
@@ -60,14 +60,20 @@ void next_life_gen(){
 void display_generation(){
     for(int y = 0; y< CELL_COUNT_2D; y++){
         for(int x=0; x< CELL_COUNT_2D; x++){
-            printf("%d", two_d_map[x][y]);
+            if(two_d_map[x][y]){
+                printf("\x1B[41m \x1B[0m");
+            }
+            else{
+                printf(" ");
+            }
+            //printf("%d", two_d_map[x][y]);
         }
         printf("\n");
     }
 }
 
 void display_life_cycles(int cycles){
-    draw_crosshair();
+    gen_random_2d_map();
     display_generation();
     printf("\n");
 
