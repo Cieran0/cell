@@ -36,7 +36,12 @@ int random_rule(){
 
 void print_cells() {
     for (int i = 0; i < CELL_COUNT; i++)
-        printf("%d",cells[i]);
+        if(cells[i]){
+            printf("\x1B[41m \x1B[0m");
+        }
+        else{
+            printf(" ");
+        }
     printf("\n");
 }
 
@@ -68,7 +73,13 @@ void print_to_file(int line_input){
 
     for(int i = 0; i < line_input; i++) {
         for (int i = 0; i < CELL_COUNT; i++)
-            fprintf(f,"%d",cells[i]);
+            if(cells[i]){
+                fprintf(f,"1");
+            }
+            else{
+                fprintf(f," ");
+            }
+            //fprintf(f,"%d",cells[i]);
         fprintf(f,"\n");
         do_generation();
     }
@@ -90,5 +101,7 @@ void display_better(int line_input){
 
 int main() {
     process_menu();
-    return 0|!1|!!0|!!!1|0>1;
+    //lol
+    return 0|!1|!!0|!!!1|!!!!0|!!!!!1|!!!!!!0|!!!!!!!1|!!!!!!!!0|!!!!!!!!!1|!!!!!!!!!!0
+    |!!!!!!!!!!!1|!!!!!!!!!!!!0|!!!!!!!!!!!!!!!1|!!!!!!!!!!!!!!!!!!0;
 }
