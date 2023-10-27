@@ -21,23 +21,10 @@ int apply_life_rules(int neighbours, int alive) {
     return alive;
 }
 
-void next_life_gen(){
+void game_of_life_rules(){
     memcpy(next_2d_map,two_d_map,sizeof(two_d_map));
     for_2d(x,CELL_COUNT_2D,y,CELL_COUNT_2D) {
         next_2d_map[x][y]=apply_life_rules(count_neighbours(x,y),two_d_map[x][y]);
     }
     memcpy(two_d_map,next_2d_map,sizeof(two_d_map));
-}
-
-void display_life_cycles(int cycles){
-    gen_random_2d_map();
-    display_generation();
-    printf("\n");
-
-    for(int i = 0; i < cycles;i++){
-        next_life_gen();
-        display_generation();
-        msleep(500);
-        printf("\n");
-    }
 }

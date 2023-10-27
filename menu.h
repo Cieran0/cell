@@ -1,6 +1,6 @@
 #pragma once
 
-#include "map.h"
+#include "automaton_1d.h"
 #include "automaton_2d.h"
 
 void print_menu();

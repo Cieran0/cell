@@ -21,7 +21,7 @@ void get_rules_and_lines(int* rules, int* lines) {
     while(getchar()!='\n');
     printf("Enter how many lines: ");
     scanf("%d", lines);
-    resetCells();
+    reset_cells();
 }
 
 int get_rule(){
@@ -61,15 +61,16 @@ void process_menu(){
             }
             case 2:{
                 get_rules_and_lines(&rules,&lines);
-                print_to_file(lines);
+                print_1d_to_file(lines);
                 break;
             }
             case 3:{
-            display_life_cycles(get_number_cycles());
+                display_cycles(get_number_cycles(),game_of_life_rules,500);
                 break;
             }
             case 4:{
-                display_factor_cycles(get_number_cycles(),get_rule());
+                rule_2d=get_rule();
+                display_cycles(get_number_cycles(),factor_rules,100);
                 break;
             }
             case 0:{
