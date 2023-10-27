@@ -11,6 +11,7 @@
 #define for_2d(x_name, x_max, y_name, y_max) \
     for (int y_name = 0; y < y_max; y_name++) \
         for (int x_name = 0; x < x_max; x_name++)
+#define msleep(milliseconds) usleep(milliseconds*1000)
 
 extern int two_d_map[CELL_COUNT_2D][CELL_COUNT_2D];
 extern int next_2d_map[CELL_COUNT_2D][CELL_COUNT_2D];

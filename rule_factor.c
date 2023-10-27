@@ -7,16 +7,8 @@ char* get_neighbours_array(int x, int y) {
         for(int j = -1; j <= 1;j++){
             if(i == 0 && j == 0)
                 continue;
-
-            //int real_x = x+i;
-            //int real_y = y+j;
-            
-            //wrap around torus
             int real_x = (x+i + CELL_COUNT_2D) % CELL_COUNT_2D;
             int real_y = (y+j + CELL_COUNT_2D) % CELL_COUNT_2D;
-            //if (!is_valid_cell(real_x,real_y))
-                //buff[current_neighbour++]=0;
-            //else
                 buff[current_neighbour++]=two_d_map[real_x][real_y];
         }
     }
@@ -44,7 +36,7 @@ void display_factor_cycles(int cycles, int rule){
     for(int i = 0; i < cycles;i++){
         next_factor_gen(rule);
         display_generation();
-        usleep(100000);
+        msleep(100);
         printf("\n");
     }
 }
