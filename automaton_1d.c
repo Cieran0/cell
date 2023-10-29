@@ -1,7 +1,7 @@
 #include "automaton_1d.h"
 
-char cells[CELL_COUNT] = {0};
-char cells_back[CELL_COUNT] = {0};
+char cells[MAX_CELL_COUNT] = {0};
+char cells_back[MAX_CELL_COUNT] = {0};
 
 const char *bit_rep[8] = {
     [0] = "000", [1] = "001", [2] = "010", [3] = "011",
@@ -27,6 +27,28 @@ void gen_map(char rule) {
 void random_cells() {
     for (int i = 0; i < CELL_COUNT; i++)
         cells[i] = rand()%2;
+}
+
+void get_start_cells(){
+    int valid = 0;
+    char input[CELL_COUNT];
+    while(!valid){
+        printf("Enter the starting cells(length currently %d): ", CELL_COUNT);
+        scanf("%s", input);
+        if(strlen(input) != CELL_COUNT){
+            printf("invalid size");
+        }
+        else{
+            valid = 1;
+        }
+    }
+
+    for(int i = 0; i < CELL_COUNT; i++){
+        if(input[i] == '1')
+            cells[i] = 1;
+        else
+            cells[i] = 0;
+    }
 }
 
 int random_rule(){

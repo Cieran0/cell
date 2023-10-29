@@ -30,10 +30,11 @@ int is_valid_cell(int x, int y) {
 }
 
 void display_generation(){
-    //TODO: figure out if actually works properly,
-    // i think it does but not 100% sure
-    for(int y = 0; y< CELL_COUNT_2D; y++)
+    printf("\e[1;1H\e[2J");
+    printf("\n");
+    for(int y = 0; y< CELL_COUNT_2D; y++){
         print_row(two_d_map[y],CELL_COUNT_2D);
+    }
 }
 
 void display_cycles(int cycles, void (*ruleset)(void), int m_delay) {

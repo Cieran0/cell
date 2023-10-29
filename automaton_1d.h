@@ -5,9 +5,11 @@
 #include "time.h"
 #include <string.h>
 
-#define CELL_COUNT 100
+#define MAX_CELL_COUNT 1000
 
-extern char cells[CELL_COUNT];
+extern char cells[MAX_CELL_COUNT];
+
+extern int CELL_COUNT;
 
 void gen_map(char rule);
 void random_cells();
@@ -19,3 +21,4 @@ void print_1d_to_file(int line_input);
 void reset_cells();
 void display_better(int line_input);
 int random_rule();
+void get_start_cells();
