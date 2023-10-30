@@ -1,5 +1,9 @@
 #include "menu.h"
 
+//  —————————
+//  IMPORTANT TODO: all inputs must be validated! 
+//  —————————
+
 int cell_count = 0;
 
 void print_menu(){
