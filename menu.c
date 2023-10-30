@@ -1,6 +1,6 @@
 #include "menu.h"
 
-int CELL_COUNT = 0;
+int cell_count = 0;
 
 void print_menu(){
     printf("1. Display 1D Cellular Automaton\n");
@@ -13,7 +13,7 @@ void print_menu(){
 
 void get_cell_count(){
     printf("Enter number of cells: ");
-    scanf("%d", &CELL_COUNT);
+    scanf("%d", &cell_count);
     printf("\n");
 }
 

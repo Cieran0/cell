@@ -25,17 +25,17 @@ void gen_map(char rule) {
 }
 
 void random_cells() {
-    for (int i = 0; i < CELL_COUNT; i++)
+    for (int i = 0; i < cell_count; i++)
         cells[i] = rand()%2;
 }
 
 void get_start_cells(){
     int valid = 0;
-    char input[CELL_COUNT];
+    char input[cell_count];
     while(!valid){
-        printf("Enter the starting cells(length currently %d): ", CELL_COUNT);
+        printf("Enter the starting cells(length currently %d): ", cell_count);
         scanf("%s", input);
-        if(strlen(input) != CELL_COUNT){
+        if(strlen(input) != cell_count){
             printf("invalid size");
         }
         else{
@@ -43,7 +43,7 @@ void get_start_cells(){
         }
     }
 
-    for(int i = 0; i < CELL_COUNT; i++){
+    for(int i = 0; i < cell_count; i++){
         if(input[i] == '1')
             cells[i] = 1;
         else
@@ -75,12 +75,12 @@ char concat(char values[], int len) {
 }
 
 void do_generation_1d() {
-    memcpy(cells_back,cells,CELL_COUNT);
+    memcpy(cells_back,cells,cell_count);
     char values[3]={0};
-    for (int i = 0; i < CELL_COUNT; i++) {
-        values[0]=cells_back[i == CELL_COUNT-1 ? 0 : i+1];
+    for (int i = 0; i < cell_count; i++) {
+        values[0]=cells_back[i == cell_count-1 ? 0 : i+1];
         values[1]=cells_back[i];
-        values[2]=cells_back[i == 0 ? CELL_COUNT-1 : i-1];
+        values[2]=cells_back[i == 0 ? cell_count-1 : i-1];
         cells[i]=map[concat(values,3)];
     }
     
@@ -94,7 +94,7 @@ void print_1d_to_file(int line_input){
         printf("Error opening file %s", filename);
 
     for(int i = 0; i < line_input; i++) {
-        for (int i = 0; i < CELL_COUNT; i++)
+        for (int i = 0; i < cell_count; i++)
             if(cells[i])
                 fprintf(f,"1");
             else
@@ -107,12 +107,12 @@ void print_1d_to_file(int line_input){
 }
 
 void reset_cells(){
-    memset(cells,0,CELL_COUNT);
+    memset(cells,0,cell_count);
 }
 
 void display_better(int line_input){
     for(int i = 0; i < line_input; i++) {
-        print_row(cells,CELL_COUNT);
+        print_row(cells,cell_count);
         do_generation_1d();
     }
 }

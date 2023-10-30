@@ -9,7 +9,7 @@
 
 extern char cells[MAX_CELL_COUNT];
 
-extern int CELL_COUNT;
+extern int cell_count;
 
 void gen_map(char rule);
 void random_cells();
