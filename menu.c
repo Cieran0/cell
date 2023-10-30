@@ -111,6 +111,7 @@ void process_menu(){
                 gen_random_2d_map();
                 //TODO: set name for output video file
                 export_to_video("test.y4m",CELL_COUNT_2D,get_number_cycles(),game_of_life_rules);
+                break;
             }
             case 0:{
                 return;

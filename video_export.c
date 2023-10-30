@@ -13,20 +13,22 @@ struct ycbcr
 #define black (ycbcr){ .y=16, .cb=128, .cr=128, }
 ycbcr colours[] = {black,white};
 
+char* fbuff = 0;
 void write_frame(FILE* file, int size) {
     int pixels_count=size*size;
-    char* buff = (char*)malloc(pixels_count*3);
+    if(!fbuff)
+        fbuff = (char*)malloc(pixels_count*3);
     fprintf(file, "FRAME\n");
     for (int j = 0; j < pixels_count; j++) {
         int y=j/size;
         int x=j%size;
         int original_x = x / SCALE;
         int original_y = y / SCALE;
-        buff[j]=colours[two_d_map[original_x][original_y]].y;
-        buff[j+pixels_count]=colours[two_d_map[original_x][original_y]].cb;
-        buff[j+pixels_count*2]=colours[two_d_map[original_x][original_y]].cr;
+        fbuff[j]=colours[two_d_map[original_x][original_y]].y;
+        fbuff[j+pixels_count]=colours[two_d_map[original_x][original_y]].cb;
+        fbuff[j+pixels_count*2]=colours[two_d_map[original_x][original_y]].cr;
     }
-    fwrite(buff, pixels_count*3, 1, file);
+    fwrite(fbuff, pixels_count*3, 1, file);
 }
 
 void export_to_video(char* filename, int size, int number_of_gens, void (*ruleset)(void)) {
@@ -43,4 +45,6 @@ void export_to_video(char* filename, int size, int number_of_gens, void (*rulese
         fflush(stdout);
     }
     fclose(file);
+    free(fbuff);
+    fbuff=0;
 }
