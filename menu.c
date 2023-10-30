@@ -90,7 +90,9 @@ void process_menu(){
                 break;
             }
             case 2:{
+                get_cell_count();
                 get_rules_and_lines(&rules,&lines);
+                gen_cells_1d();
                 print_1d_to_file(lines);
                 break;
             }
