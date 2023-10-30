@@ -6,7 +6,8 @@ void print_menu(){
     printf("1. Display 1D Cellular Automaton\n");
     printf("2. Print 1D Cellular Automaton to txt\n");
     printf("3. Display 2D CA rule of life for x cycles\n");
-    printf("4. Print 2D CA with x rules and y cycles\n");
+    printf("4. Display 2D CA with x rules and y cycles\n");
+    printf("5. Export 2D CA rule of life for x cycles to video\n");
     printf("0. Exit\n");
 }
 
@@ -96,6 +97,7 @@ void process_menu(){
                 print_1d_to_file(lines);
                 break;
             }
+            //TODO: select size for 2d automaton
             case 3:{
                 display_cycles(get_number_cycles(),game_of_life_rules,500);
                 break;
@@ -104,6 +106,11 @@ void process_menu(){
                 rule_2d=get_rule();
                 display_cycles(get_number_cycles(),factor_rules,500);
                 break;
+            }
+            case 5: {
+                gen_random_2d_map();
+                //TODO: set name for output video file
+                export_to_video("test.y4m",CELL_COUNT_2D,get_number_cycles(),game_of_life_rules);
             }
             case 0:{
                 return;
