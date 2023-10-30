@@ -40,9 +40,9 @@ void display_generation(){
 void display_cycles(int cycles, void (*ruleset)(void), int m_delay) {
     gen_random_2d_map();
     for(int i = 0; i < cycles;i++){
+        printf("\e[1;1H\e[2J");
         display_generation();
         msleep(m_delay);
-        printf("\n");
         ruleset();
     }
 }

@@ -100,7 +100,7 @@ void process_menu(){
             }
             case 4:{
                 rule_2d=get_rule();
-                display_cycles(get_number_cycles(),factor_rules,100);
+                display_cycles(get_number_cycles(),factor_rules,500);
                 break;
             }
             case 0:{
