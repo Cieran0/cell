@@ -108,6 +108,10 @@ void process_menu(){
             case 0:{
                 return;
             }
+            default:{
+                printf("\nInvalid input, please enter a valid choice. \n");
+                break;
+            }
         }
     }
 }
