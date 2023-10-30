@@ -7,3 +7,5 @@ void print_menu();
 void process_menu();
 void get_rules_and_lines(int* rules, int* lines);
 int get_number_cycles();
+void get_cell_count();
+void gen_cells_1d();

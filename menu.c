@@ -1,11 +1,19 @@
 #include "menu.h"
 
+int CELL_COUNT = 0;
+
 void print_menu(){
     printf("1. Display 1D Cellular Automaton\n");
     printf("2. Print 1D Cellular Automaton to txt\n");
     printf("3. Display 2D CA rule of life for x cycles\n");
     printf("4. Print 2D CA with x rules and y cycles\n");
     printf("0. Exit\n");
+}
+
+void get_cell_count(){
+    printf("Enter number of cells: ");
+    scanf("%d", &CELL_COUNT);
+    printf("\n");
 }
 
 void get_rules_and_lines(int* rules, int* lines) {
@@ -34,6 +42,26 @@ int get_rule(){
     return rule;
 }
 
+void gen_cells_1d(){
+    int choice = -1;
+    printf("\nWould you like to choose first generation or get random: ");
+    printf("\n1. Random Generation");
+    printf("\n2. Enter Generation\n");
+
+    scanf("%d", &choice);
+
+    switch(choice){
+        case 1:{
+            random_cells();
+            break;
+        }
+        case 2:{
+            get_start_cells();
+            break;
+        }
+    }
+}
+
 int get_number_cycles(){
     int cycles = 0;
 
@@ -55,7 +83,9 @@ void process_menu(){
 
         switch(menu_input){
             case 1:{
+                get_cell_count();
                 get_rules_and_lines(&rules,&lines);
+                gen_cells_1d();
                 display_better(lines);
                 break;
             }
