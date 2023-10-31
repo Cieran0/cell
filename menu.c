@@ -2,6 +2,17 @@
 
 int CELL_COUNT = 0;
 
+int validation(int min_parameter, int max_parameter){
+    int number;
+
+    while(!scanf("%d", &number) || number < min_parameter || number > max_parameter){
+            printf("invalid input. try again. \n");
+            while(getchar()!='\n');
+            }
+
+    return number;
+}
+
 void print_menu(){
     printf("1. Display 1D Cellular Automaton\n");
     printf("2. Print 1D Cellular Automaton to txt\n");
@@ -11,24 +22,30 @@ void print_menu(){
 }
 
 void get_cell_count(){
+    int min_parameter = 0;
+    int max_parameter = MAX_CELL_COUNT;
+
     printf("Enter number of cells: ");
-    scanf("%d", &CELL_COUNT);
+    CELL_COUNT = validation(min_parameter, max_parameter);
+
     printf("\n");
 }
 
 void get_rules_and_lines(int* rules, int* lines) {
+
+    int min_rule_number = 0;
+    int max_rule_number = 255;
+
+    int min_line_number = 1;
+    int max_line_number = 1000;
+
     printf("Enter a rule: ");
-    if(!scanf("%d", rules)){
-        *rules=random_rule();
-        gen_map(*rules);
-        printf("rule: %d\n",*rules);
-    }
-    else {
-        gen_map(*rules);
-    }
-    while(getchar()!='\n');
+    *rules = validation(min_rule_number, max_rule_number);
+    printf("Rule: %d\n",*rules);
+
     printf("Enter how many lines: ");
-    scanf("%d", lines);
+    *lines = validation(min_line_number, max_line_number);
+
     reset_cells();
 }
 
@@ -36,21 +53,23 @@ int get_rule(){
     int rule = 0;
 
     printf("\nEnter rule: ");
-    scanf("%d", &rule);
+    rule = validation(0,255);
     printf("\n");
 
     return rule;
 }
 
 void gen_cells_1d(){
-    int choice = -1;
+    
+  
     printf("\nWould you like to choose first generation or get random: ");
     printf("\n1. Random Generation");
     printf("\n2. Enter Generation\n");
 
-    scanf("%d", &choice);
+    
 
-    switch(choice){
+    switch(validation(1,2)){
+
         case 1:{
             random_cells();
             break;
@@ -59,14 +78,17 @@ void gen_cells_1d(){
             get_start_cells();
             break;
         }
-    }
+        default:{
+            printf("\nInvalid input, please enter a valid choice. \n");
+        }
+    }  
 }
 
 int get_number_cycles(){
     int cycles = 0;
 
     printf("Enter number of cycles: ");
-    scanf("%d", &cycles);
+    cycles = validation(1,10000);
     printf("\n");
 
     return cycles;
@@ -86,6 +108,7 @@ void process_menu(){
                 get_cell_count();
                 get_rules_and_lines(&rules,&lines);
                 gen_cells_1d();
+                gen_map(rules);
                 display_better(lines);
                 break;
             }
@@ -93,6 +116,7 @@ void process_menu(){
                 get_cell_count();
                 get_rules_and_lines(&rules,&lines);
                 gen_cells_1d();
+                gen_map(rules);
                 print_1d_to_file(lines);
                 break;
             }
