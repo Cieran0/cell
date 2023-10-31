@@ -1,6 +1,10 @@
 #include "menu.h"
 
-int CELL_COUNT = 0;
+//  —————————
+//  IMPORTANT TODO: all inputs must be validated! 
+//  —————————
+
+int cell_count = 0;
 
 int validation(int min_parameter, int max_parameter){
     int number;
@@ -17,7 +21,8 @@ void print_menu(){
     printf("1. Display 1D Cellular Automaton\n");
     printf("2. Print 1D Cellular Automaton to txt\n");
     printf("3. Display 2D CA rule of life for x cycles\n");
-    printf("4. Print 2D CA with x rules and y cycles\n");
+    printf("4. Display 2D CA with x rules and y cycles\n");
+    printf("5. Export 2D CA rule of life for x cycles to video\n");
     printf("0. Exit\n");
 }
 
@@ -26,8 +31,7 @@ void get_cell_count(){
     int max_parameter = MAX_CELL_COUNT;
 
     printf("Enter number of cells: ");
-    CELL_COUNT = validation(min_parameter, max_parameter);
-
+    cell_count = validation(min_parameter, max_parameter);
     printf("\n");
 }
 
@@ -120,6 +124,7 @@ void process_menu(){
                 print_1d_to_file(lines);
                 break;
             }
+            //TODO: select size for 2d automaton
             case 3:{
                 display_cycles(get_number_cycles(),game_of_life_rules,500);
                 break;
@@ -127,6 +132,12 @@ void process_menu(){
             case 4:{
                 rule_2d=get_rule();
                 display_cycles(get_number_cycles(),factor_rules,500);
+                break;
+            }
+            case 5: {
+                gen_random_2d_map();
+                //TODO: set name for output video file
+                export_to_video("test.y4m",CELL_COUNT_2D,get_number_cycles(),game_of_life_rules);
                 break;
             }
             case 0:{

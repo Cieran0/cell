@@ -26,3 +26,4 @@ void display_generation();
 void display_cycles(int cycles, void (*ruleset)(void), int m_delay);
 void factor_rules();
 void game_of_life_rules();
+void export_to_video(char* filename, int size, int number_of_gens, void (*ruleset)(void));
