@@ -3,6 +3,7 @@
 char two_d_map[CELL_COUNT_2D][CELL_COUNT_2D]={0};
 char next_2d_map[CELL_COUNT_2D][CELL_COUNT_2D]={0};
 int rule_2d=0;
+char neighbour_buffer[8] = {0};
 
 void gen_random_2d_map(){
     srand(time(NULL));
@@ -45,4 +46,18 @@ void display_cycles(int cycles, void (*ruleset)(void), int m_delay) {
         msleep(m_delay);
         ruleset();
     }
+}
+
+char* get_neighbours_array(int x, int y) {
+    int current_neighbour=0;
+    for(int i = -1; i<= 1;i++){
+        for(int j = -1; j <= 1;j++){
+            if(i == 0 && j == 0)
+                continue;
+            int real_x = (x+i + CELL_COUNT_2D) % CELL_COUNT_2D;
+            int real_y = (y+j + CELL_COUNT_2D) % CELL_COUNT_2D;
+                neighbour_buffer[current_neighbour++]=two_d_map[real_x][real_y];
+        }
+    }
+    return neighbour_buffer;
 }
