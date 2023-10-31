@@ -16,6 +16,7 @@
 extern char two_d_map[CELL_COUNT_2D][CELL_COUNT_2D];
 extern char next_2d_map[CELL_COUNT_2D][CELL_COUNT_2D];
 extern int rule_2d;
+extern char neighbour_buffer[];
 
 void gen_random_2d_map();
 void draw_crosshair();
@@ -26,4 +27,6 @@ void display_generation();
 void display_cycles(int cycles, void (*ruleset)(void), int m_delay);
 void factor_rules();
 void game_of_life_rules();
+char* get_neighbours_array(int x, int y);
 void export_to_video(char* filename, int size, int number_of_gens, void (*ruleset)(void));
+void rule_2d_rules();
