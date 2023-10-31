@@ -1,15 +1,16 @@
 #include "automaton_2d.h"
 
-char two_d_map[CELL_COUNT_2D][CELL_COUNT_2D]={0};
-char next_2d_map[CELL_COUNT_2D][CELL_COUNT_2D]={0};
+char two_d_map[MAX_CELL_COUNT_2D][MAX_CELL_COUNT_2D]={0};
+char next_2d_map[MAX_CELL_COUNT_2D][MAX_CELL_COUNT_2D]={0};
 int rule_2d=0;
 char neighbour_buffer[8] = {0};
+int cell_count_2d = 20;
 
 void gen_random_2d_map(){
     srand(time(NULL));
 
-    for(int y = 0; y < CELL_COUNT_2D; y++){
-        for(int x = 0; x < CELL_COUNT_2D; x++){
+    for(int y = 0; y < cell_count_2d; y++){
+        for(int x = 0; x < cell_count_2d; x++){
             two_d_map[x][y] = (rand()%4 == 0);
         }
     }
@@ -27,14 +28,14 @@ void draw_crosshair(){
 }
 
 int is_valid_cell(int x, int y) {
-    return (x >= 0 && x < CELL_COUNT_2D && y >= 0 && y < CELL_COUNT_2D);
+    return (x >= 0 && x < cell_count_2d && y >= 0 && y < cell_count_2d);
 }
 
 void display_generation(){
     printf("\e[1;1H\e[2J");
     printf("\n");
-    for(int y = 0; y< CELL_COUNT_2D; y++){
-        print_row(two_d_map[y],CELL_COUNT_2D);
+    for(int y = 0; y< cell_count_2d; y++){
+        print_row(two_d_map[y],cell_count_2d);
     }
 }
 
@@ -54,8 +55,8 @@ char* get_neighbours_array(int x, int y) {
         for(int j = -1; j <= 1;j++){
             if(i == 0 && j == 0)
                 continue;
-            int real_x = (x+i + CELL_COUNT_2D) % CELL_COUNT_2D;
-            int real_y = (y+j + CELL_COUNT_2D) % CELL_COUNT_2D;
+            int real_x = (x+i + cell_count_2d) % cell_count_2d;
+            int real_y = (y+j + cell_count_2d) % cell_count_2d;
                 neighbour_buffer[current_neighbour++]=two_d_map[real_x][real_y];
         }
     }

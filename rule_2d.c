@@ -11,7 +11,7 @@ void gen_map_2d(char rule) {
 
 void rule_2d_rules(){
     memcpy(next_2d_map,two_d_map,sizeof(two_d_map));
-    for_2d(x,CELL_COUNT_2D,y,CELL_COUNT_2D) {
+    for_2d(x,cell_count_2d,y,cell_count_2d) {
         next_2d_map[x][y]=map_2d[(concat(get_neighbours_array(x,y),8))];
     }
     memcpy(two_d_map,next_2d_map,sizeof(two_d_map));

@@ -1,9 +1,5 @@
 #include "menu.h"
 
-//  —————————
-//  IMPORTANT TODO: all inputs must be validated! 
-//  —————————
-
 int cell_count = 0;
 
 int validation(int min_parameter, int max_parameter){
@@ -27,11 +23,20 @@ void print_menu(){
 }
 
 void get_cell_count(){
-    int min_parameter = 0;
+    int min_parameter = 1;
     int max_parameter = MAX_CELL_COUNT;
 
     printf("Enter number of cells: ");
     cell_count = validation(min_parameter, max_parameter);
+    printf("\n");
+}
+
+void get_cell_count_2d(){
+    int min_parameter = 1;
+    int max_parameter = MAX_CELL_COUNT_2D;
+
+    printf("Enter number of cells: ");
+    cell_count_2d = validation(min_parameter, max_parameter);
     printf("\n");
 }
 
@@ -98,6 +103,15 @@ int get_number_cycles(){
     return cycles;
 }
 
+char name_buffer[255] = {0};
+char* input_name(){
+    memset(name_buffer, 0, 255);
+    printf("enter the file name: \n");
+    scanf("%s", name_buffer);
+
+    return name_buffer;
+}
+
 void process_menu(){
     while(1){
         print_menu();
@@ -126,18 +140,20 @@ void process_menu(){
             }
             //TODO: select size for 2d automaton
             case 3:{
+                get_cell_count_2d();
                 display_cycles(get_number_cycles(),game_of_life_rules,500);
                 break;
             }
             case 4:{
+                get_cell_count_2d();
                 rule_2d=get_rule();
                 display_cycles(get_number_cycles(),factor_rules,500);
                 break;
             }
             case 5: {
+                get_cell_count_2d();
                 gen_random_2d_map();
-                //TODO: set name for output video file
-                export_to_video("test.y4m",CELL_COUNT_2D,get_number_cycles(),game_of_life_rules);
+                export_to_video(input_name(),cell_count_2d,get_number_cycles(),game_of_life_rules);
                 break;
             }
             case 0:{

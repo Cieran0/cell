@@ -59,7 +59,7 @@ int random_rule(){
 void print_row(char* row, int count) {
     for (int i = 0; i < count; i++)
         if(row[i]){
-            printf("\x1B[41m \x1B[0m");
+            printf("\x1B[47m \x1B[0m");
         }
         else{
             printf(" ");
