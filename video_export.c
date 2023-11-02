@@ -24,9 +24,10 @@ void write_frame(FILE* file, int size) {
         int x=j%size;
         int original_x = x / SCALE;
         int original_y = y / SCALE;
-        fbuff[j]=colours[two_d_map[original_x][original_y]].y;
-        fbuff[j+pixels_count]=colours[two_d_map[original_x][original_y]].cb;
-        fbuff[j+pixels_count*2]=colours[two_d_map[original_x][original_y]].cr;
+        int is_alive = board[original_x][original_y];
+        fbuff[j]=colours[is_alive].y;
+        fbuff[j+pixels_count]=colours[is_alive].cb;
+        fbuff[j+pixels_count*2]=colours[is_alive].cr;
     }
     fwrite(fbuff, pixels_count*3, 1, file);
 }

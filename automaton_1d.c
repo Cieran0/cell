@@ -20,7 +20,7 @@ char map[] = {
 };
 
 void gen_map(char rule) {
-    for (char i = 0; i < 8; i++)
+    for (int i = 0; i < 8; i++)
         map[i] = ((rule >> i)  & 0x01);
 }
 
@@ -67,8 +67,8 @@ void print_row(char* row, int count) {
     printf("\n");
 }
 
-char concat(char values[], int len) {
-    char result=0;
+int concat(char values[], int len) {
+    int result=0;
     for (int i = 0; i < len; i++)
         result |= (values[i] << i);
     return result;

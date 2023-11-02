@@ -141,19 +141,19 @@ void process_menu(){
             //TODO: select size for 2d automaton
             case 3:{
                 get_cell_count_2d();
-                display_cycles(get_number_cycles(),game_of_life_rules,500);
+                display_cycles(get_number_cycles(),game_of_life_ruleset,500);
                 break;
             }
             case 4:{
                 get_cell_count_2d();
                 rule_2d=get_rule();
-                display_cycles(get_number_cycles(),factor_rules,500);
+                display_cycles(get_number_cycles(),factor_ruleset,500);
                 break;
             }
             case 5: {
                 get_cell_count_2d();
-                gen_random_2d_map();
-                export_to_video(input_name(),cell_count_2d,get_number_cycles(),game_of_life_rules);
+                gen_random_board();
+                export_to_video(input_name(),cell_count_2d,get_number_cycles(),game_of_life_ruleset);
                 break;
             }
             case 0:{

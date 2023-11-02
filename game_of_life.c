@@ -6,10 +6,10 @@ int count_neighbours(int x, int y) {
         for(int j = -1; j <= 1;j++){
             if(!is_valid_cell(x+i,y+j))  
                 continue;
-            neighbour_count += two_d_map[x+i][y+j];
+            neighbour_count += board[x+i][y+j];
         }
     }
-    neighbour_count -= two_d_map[x][y];
+    neighbour_count -= board[x][y];
     return neighbour_count;
 }
 
@@ -21,10 +21,10 @@ int apply_life_rules(int neighbours, int alive) {
     return alive;
 }
 
-void game_of_life_rules(){
-    memcpy(next_2d_map,two_d_map,sizeof(two_d_map));
+void game_of_life_ruleset(){
+    memcpy(next_board,board,sizeof(board));
     for_2d(x,cell_count_2d,y,cell_count_2d) {
-        next_2d_map[x][y]=apply_life_rules(count_neighbours(x,y),two_d_map[x][y]);
+        next_board[x][y]=apply_life_rules(count_neighbours(x,y),board[x][y]);
     }
-    memcpy(two_d_map,next_2d_map,sizeof(two_d_map));
+    memcpy(board,next_board,sizeof(board));
 }

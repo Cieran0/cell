@@ -14,7 +14,7 @@ extern int cell_count;
 void gen_map(char rule);
 void random_cells();
 void print_row(char* row, int count);
-char concat(char values[], int len);
+int concat(char values[], int len);
 char* positions_to_values(char positions[]);
 void do_generation_1d();
 void print_1d_to_file(int line_input);
