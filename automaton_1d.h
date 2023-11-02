@@ -19,6 +19,6 @@ char* positions_to_values(char positions[]);
 void do_generation_1d();
 void print_1d_to_file(int line_input);
 void reset_cells();
-void display_better(int line_input);
+void display_1d_automaton(int line_input);
 int random_rule();
 void get_start_cells();

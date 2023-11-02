@@ -30,24 +30,34 @@ void random_cells() {
 }
 
 void get_start_cells(){
+    int attempts = 3;
     int valid = 0;
     char input[cell_count];
-    while(!valid){
-        printf("Enter the starting cells(length currently %d): ", cell_count);
+    while(!valid && attempts >= 0){
+        printf("Enter the starting cells(length currently %d):\n", cell_count);
         scanf("%s", input);
-        if(strlen(input) != cell_count){
-            printf("invalid size");
-        }
-        else{
+        if(strlen(input) == cell_count)
             valid = 1;
+        else {
+            printf("Invalid size try again (%d attempts left):\n",attempts);
+            attempts--;
         }
     }
 
+    if(!valid) {
+        printf("Ran out of attemps generating random cells instead\n");
+        random_cells();
+        return;
+    }
+
     for(int i = 0; i < cell_count; i++){
-        if(input[i] == '1')
-            cells[i] = 1;
-        else
-            cells[i] = 0;
+        if(input[i] == '1' || input[i] == '0')
+            cells[i] = input[i] - 48;
+        else {
+            printf("Invalid input detected, generating random cells instead\n");
+            random_cells();
+            break;
+        }
     }
 }
 
@@ -110,7 +120,7 @@ void reset_cells(){
     memset(cells,0,cell_count);
 }
 
-void display_better(int line_input){
+void display_1d_automaton(int line_input){
     for(int i = 0; i < line_input; i++) {
         print_row(cells,cell_count);
         do_generation_1d();

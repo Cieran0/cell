@@ -2,7 +2,7 @@
 
 int cell_count = 0;
 
-int validation(int min_parameter, int max_parameter){
+int get_valid_number(int min_parameter, int max_parameter){
     int number;
 
     while(!scanf("%d", &number) || number < min_parameter || number > max_parameter){
@@ -13,13 +13,101 @@ int validation(int min_parameter, int max_parameter){
     return number;
 }
 
-void print_menu(){
-    printf("1. Display 1D Cellular Automaton\n");
-    printf("2. Print 1D Cellular Automaton to txt\n");
-    printf("3. Display 2D CA rule of life for x cycles\n");
-    printf("4. Display 2D CA with x rules and y cycles\n");
-    printf("5. Export 2D CA rule of life for x cycles to video\n");
+void display_main_menu(){
+    printf("Select An Option\n");
+    printf("1. 1D Cellular Automaton\n");
+    printf("2. 2D Cellular Automaton\n");
     printf("0. Exit\n");
+}
+
+void display_1d_menu() {
+    printf("\nSelect An Option\n");
+    printf("1. Display 1D Cellular Automaton on the console\n");
+    printf("2. Output 1D Cellular Automaton to file\n");
+    printf("0. Main menu\n");
+}
+
+void process_1d_menu() {
+    get_cell_count();
+    int rule = get_rule();
+    gen_map(rule);
+    int cycles = get_number_cycles();
+    reset_cells();
+    gen_cells_1d();
+    display_1d_menu();
+    switch (get_valid_number(0,2))
+    {
+        case 1: {
+            display_1d_automaton(cycles);
+            break;
+        }
+        case 2: {
+            print_1d_to_file(cycles);
+            break;
+        }
+        case 0:
+            return;
+    }
+}
+
+void display_2d_menu() {
+    printf("\nSelect A Ruleset\n");
+    printf("1. Game of life\n");
+    printf("2. Factor\n");
+    printf("3. Rule 2D\n");
+    printf("0. Main menu\n");
+}
+
+void* process_2d_menu() {
+    display_2d_menu();
+    switch (get_valid_number(0,3))
+    {
+        case 1:
+            return game_of_life_ruleset;
+        case 2:
+            return factor_ruleset;
+        case 3:
+            return rule_2d_ruleset;
+        case 0:
+            break;
+    }
+    return NULL;
+}
+
+void display_2d_sub_menu() {
+    printf("\nSelect An Option\n");
+    printf("1. Display on the console\n");
+    printf("2. Export to video file\n");
+    printf("0. Main menu\n");
+}
+
+void process_2d_sub_menu(void* ruleset) {
+    get_cell_count_2d();
+    int rule = 0;
+    if(ruleset == NULL) 
+        return;
+    if(ruleset != game_of_life_ruleset)
+        rule = get_rule();
+    rule_2d=rule;
+    printf("HERE:1\n");
+    gen_map_2d(rule_2d);
+    printf("HERE:2\n");
+    int cycles = get_number_cycles();
+    printf("HERE:3\n");
+    gen_random_board();
+    printf("HERE:4\n");
+    display_2d_sub_menu();
+    switch (get_valid_number(0,2))
+    {
+    case 1:
+        display_cycles(cycles,ruleset,500);
+        break;
+    case 2:
+        export_to_video(input_name(),cell_count_2d,cycles,ruleset);
+        break;
+    case 0:
+        return;
+    }
 }
 
 void get_cell_count(){
@@ -27,7 +115,7 @@ void get_cell_count(){
     int max_parameter = MAX_CELL_COUNT;
 
     printf("Enter number of cells: ");
-    cell_count = validation(min_parameter, max_parameter);
+    cell_count = get_valid_number(min_parameter, max_parameter);
     printf("\n");
 }
 
@@ -36,48 +124,26 @@ void get_cell_count_2d(){
     int max_parameter = MAX_CELL_COUNT_2D;
 
     printf("Enter number of cells: ");
-    cell_count_2d = validation(min_parameter, max_parameter);
+    cell_count_2d = get_valid_number(min_parameter, max_parameter);
     printf("\n");
-}
-
-void get_rules_and_lines(int* rules, int* lines) {
-
-    int min_rule_number = 0;
-    int max_rule_number = 255;
-
-    int min_line_number = 1;
-    int max_line_number = 1000;
-
-    printf("Enter a rule: ");
-    *rules = validation(min_rule_number, max_rule_number);
-    printf("Rule: %d\n",*rules);
-
-    printf("Enter how many lines: ");
-    *lines = validation(min_line_number, max_line_number);
-
-    reset_cells();
 }
 
 int get_rule(){
     int rule = 0;
 
     printf("\nEnter rule: ");
-    rule = validation(0,255);
+    rule = get_valid_number(0,255);
     printf("\n");
 
     return rule;
 }
 
 void gen_cells_1d(){
-    
-  
+
     printf("\nWould you like to choose first generation or get random: ");
     printf("\n1. Random Generation");
     printf("\n2. Enter Generation\n");
-
-    
-
-    switch(validation(1,2)){
+    switch(get_valid_number(1,2)){
 
         case 1:{
             random_cells();
@@ -97,7 +163,7 @@ int get_number_cycles(){
     int cycles = 0;
 
     printf("Enter number of cycles: ");
-    cycles = validation(1,10000);
+    cycles = get_valid_number(1,10000);
     printf("\n");
 
     return cycles;
@@ -114,55 +180,19 @@ char* input_name(){
 
 void process_menu(){
     while(1){
-        print_menu();
-        int menu_input;
-        int lines;
-        int rules;
-    
-        scanf("%d", &menu_input);
+        display_main_menu();
 
-        switch(menu_input){
-            case 1:{
-                get_cell_count();
-                get_rules_and_lines(&rules,&lines);
-                gen_cells_1d();
-                gen_map(rules);
-                display_better(lines);
+        switch(get_valid_number(0,2)){
+            case 1: {
+                process_1d_menu();
                 break;
             }
-            case 2:{
-                get_cell_count();
-                get_rules_and_lines(&rules,&lines);
-                gen_cells_1d();
-                gen_map(rules);
-                print_1d_to_file(lines);
+            case 2: {
+                process_2d_sub_menu(process_2d_menu());
                 break;
             }
-            //TODO: select size for 2d automaton
-            case 3:{
-                get_cell_count_2d();
-                display_cycles(get_number_cycles(),game_of_life_ruleset,500);
-                break;
-            }
-            case 4:{
-                get_cell_count_2d();
-                rule_2d=get_rule();
-                display_cycles(get_number_cycles(),factor_ruleset,500);
-                break;
-            }
-            case 5: {
-                get_cell_count_2d();
-                gen_random_board();
-                export_to_video(input_name(),cell_count_2d,get_number_cycles(),game_of_life_ruleset);
-                break;
-            }
-            case 0:{
+            case 0:
                 return;
-            }
-            default:{
-                printf("\nInvalid input, please enter a valid choice. \n");
-                break;
-            }
         }
     }
 }

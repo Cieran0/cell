@@ -33,3 +33,4 @@ void game_of_life_ruleset();
 char* get_neighbours_array(int x, int y);
 void export_to_video(char* filename, int size, int number_of_gens, void (*ruleset)(void));
 void rule_2d_ruleset();
+void gen_map_2d(char rule);
