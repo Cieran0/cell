@@ -89,13 +89,9 @@ void process_2d_sub_menu(void* ruleset) {
     if(ruleset != game_of_life_ruleset)
         rule = get_rule();
     rule_2d=rule;
-    printf("HERE:1\n");
     gen_map_2d(rule_2d);
-    printf("HERE:2\n");
     int cycles = get_number_cycles();
-    printf("HERE:3\n");
     gen_random_board();
-    printf("HERE:4\n");
     display_2d_sub_menu();
     switch (get_valid_number(0,2))
     {
