@@ -24,7 +24,6 @@ void draw_crosshair(){
         board[9-i][5]=1;
         board[5][i+7]=1;
     }
-    
 }
 
 int is_valid_cell(int x, int y) {
