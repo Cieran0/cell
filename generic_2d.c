@@ -11,7 +11,7 @@ void gen_random_board(){
 
     for(int y = 0; y < cell_count_2d; y++){
         for(int x = 0; x < cell_count_2d; x++){
-            board[x][y] = (rand()%4 == 0);
+            board[x][y] = (rand()%8 == 0);
         }
     }
 }
