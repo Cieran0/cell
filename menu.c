@@ -6,7 +6,7 @@ int get_valid_number(int min_parameter, int max_parameter){
     int number;
 
     while(!scanf("%d", &number) || number < min_parameter || number > max_parameter){
-            printf("invalid input. try again. \n");
+            printf("Invalid input.\nEnter a number between %d and %d:\n",min_parameter,max_parameter);
             while(getchar()!='\n');
             }
 
