@@ -2,6 +2,7 @@
 
 int cell_count = 0;
 
+//validating menu inputs
 int get_valid_number(int min_parameter, int max_parameter){
     int number;
 
@@ -13,6 +14,7 @@ int get_valid_number(int min_parameter, int max_parameter){
     return number;
 }
 
+//main menu
 void display_main_menu(){
     printf("Select An Option\n");
     printf("1. 1D Cellular Automaton\n");
@@ -20,6 +22,7 @@ void display_main_menu(){
     printf("0. Exit\n");
 }
 
+//1d sub menu
 void display_1d_menu() {
     printf("\nSelect An Option\n");
     printf("1. Display 1D Cellular Automaton on the console\n");
@@ -28,6 +31,7 @@ void display_1d_menu() {
 }
 
 void process_1d_menu() {
+    //generate initial board with cell count, getting rule and then generating
     get_cell_count();
     int rule = get_rule();
     gen_map(rule);
@@ -35,8 +39,10 @@ void process_1d_menu() {
     reset_cells();
     gen_cells_1d();
     display_1d_menu();
+    //makes sure input  is valid
     switch (get_valid_number(0,2))
     {
+        //process display option
         case 1: {
             display_1d_automaton(cycles);
             break;
@@ -50,6 +56,7 @@ void process_1d_menu() {
     }
 }
 
+//2d sub menu
 void display_2d_menu() {
     printf("\nSelect A Ruleset\n");
     printf("1. Game of life\n");
@@ -62,6 +69,7 @@ void* process_2d_menu() {
     display_2d_menu();
     switch (get_valid_number(0,3))
     {
+        //choose ruleset
         case 1:
             return game_of_life_ruleset;
         case 2:
@@ -74,6 +82,7 @@ void* process_2d_menu() {
     return NULL;
 }
 
+//2d sub menu
 void display_2d_sub_menu() {
     printf("\nSelect An Option\n");
     printf("1. Display on the console\n");
@@ -82,6 +91,7 @@ void display_2d_sub_menu() {
 }
 
 void process_2d_sub_menu(void* ruleset) {
+    //gen initial board with users chosen  rules
     get_cell_count_2d();
     int rule = 0;
     if(ruleset == NULL) 
@@ -95,6 +105,7 @@ void process_2d_sub_menu(void* ruleset) {
     display_2d_sub_menu();
     switch (get_valid_number(0,2))
     {
+        //choose display method
     case 1:
         display_cycles(cycles,ruleset,500);
         break;
@@ -107,6 +118,7 @@ void process_2d_sub_menu(void* ruleset) {
 }
 
 void get_cell_count(){
+    //get cells
     int min_parameter = 1;
     int max_parameter = MAX_CELL_COUNT;
 
@@ -115,6 +127,7 @@ void get_cell_count(){
     printf("\n");
 }
 
+//get cells 2d
 void get_cell_count_2d(){
     int min_parameter = 1;
     int max_parameter = MAX_CELL_COUNT_2D;
@@ -140,6 +153,7 @@ void gen_cells_1d(){
     printf("\n1. Random Generation");
     printf("\n2. Enter Generation\n");
     switch(get_valid_number(1,2)){
+        //gen based  off of user input
 
         case 1:{
             random_cells();
@@ -155,6 +169,7 @@ void gen_cells_1d(){
     }  
 }
 
+//get cycles from user
 int get_number_cycles(){
     int cycles = 0;
 
@@ -166,6 +181,7 @@ int get_number_cycles(){
 }
 
 char name_buffer[255] = {0};
+//filename of video output
 char* input_name(){
     memset(name_buffer, 0, 255);
     printf("enter the file name: \n");
@@ -174,6 +190,7 @@ char* input_name(){
     return name_buffer;
 }
 
+//process initial menu
 void process_menu(){
     while(1){
         display_main_menu();
