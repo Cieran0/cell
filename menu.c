@@ -124,7 +124,6 @@ void get_cell_count(){
 
     printf("Enter number of cells: ");
     cell_count = get_valid_number(min_parameter, max_parameter);
-    printf("\n");
 }
 
 //get cells 2d
@@ -134,15 +133,13 @@ void get_cell_count_2d(){
 
     printf("Enter number of cells: ");
     cell_count_2d = get_valid_number(min_parameter, max_parameter);
-    printf("\n");
 }
 
 int get_rule(){
     int rule = 0;
 
-    printf("\nEnter rule: ");
+    printf("Enter rule: ");
     rule = get_valid_number(0,255);
-    printf("\n");
 
     return rule;
 }
@@ -175,8 +172,6 @@ int get_number_cycles(){
 
     printf("Enter number of cycles: ");
     cycles = get_valid_number(1,10000);
-    printf("\n");
-
     return cycles;
 }
 
@@ -184,7 +179,7 @@ char name_buffer[255] = {0};
 //filename of video output
 char* input_name(){
     memset(name_buffer, 0, 255);
-    printf("enter the file name: \n");
+    printf("enter the file name:");
     scanf("%s", name_buffer);
 
     return name_buffer;
